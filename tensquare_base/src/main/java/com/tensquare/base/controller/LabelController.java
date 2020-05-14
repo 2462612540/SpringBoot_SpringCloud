@@ -14,7 +14,6 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/label")
-//@RefreshScope
 public class LabelController {
 
     @Autowired
