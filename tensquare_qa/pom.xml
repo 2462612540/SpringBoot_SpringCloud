@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>tensquare_base</artifactId>
+    <artifactId>tensquare_qa</artifactId>
     <dependencies>
         <!--common-->
         <dependency>
@@ -31,8 +31,4 @@
             <version>2.1.1.RELEASE</version>
         </dependency>
     </dependencies>
-
-
-
-
 </project>
