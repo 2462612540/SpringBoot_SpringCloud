@@ -1,10 +1,10 @@
-package com.shanghaiuniversity.spingcloudbese;
+package com.tensquare.base;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringcloudbaseApplicationTests {
+class BaseApplicationTests {
 
     @Test
     void contextLoads() {

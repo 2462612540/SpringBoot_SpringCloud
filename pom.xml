@@ -8,7 +8,7 @@
     <artifactId>SpringCloud_Vue</artifactId>
     <version>1.0</version>
     <modules>
-        <module>SpringCloud_common</module>
+        <module>tensquare_common</module>
     </modules>
     <packaging>pom</packaging>
     <!--Springboot-->
