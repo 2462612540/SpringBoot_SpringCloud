@@ -1,17 +1,15 @@
 server:
-  port: 9004
+  port: 9005
 spring:
   application:
-    name: tensquare_article
+    name: tensquare_gathering
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.25.132:3306/tensquare_article?&characterEncoding=utf8&useSSL=true&allowMultiQueries=true
+    url: jdbc:mysql://192.168.25.132:3306/tensquare_gathering?&characterEncoding=utf8&useSSL=true&allowMultiQueries=true
     username: root
     password: root
   jpa:
     database: mysql
     show-sql: true
     generate-ddl: false
-  redis:
-    host: 192.168.25.132
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import util.IdWorker;
 
@@ -16,6 +17,7 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 服务层
@@ -31,11 +33,14 @@ public class ArticleService {
     @Autowired
     private IdWorker idWorker;
 
-    public void updateState(String id){
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    public void updateState(String id) {
         articleDao.updateState(id);
     }
 
-    public void updateThumbup(String id){
+    public void updateThumbup(String id) {
         articleDao.updateThumbup(id);
     }
 
@@ -80,7 +85,15 @@ public class ArticleService {
      * @return
      */
     public Article findById(String id) {
-        return articleDao.findById(id).get();
+        //先从缓存中查询数据
+        Article article = (Article) redisTemplate.opsForValue().get("article_" + id);
+        if (article == null) {
+            //缓存中的数据为空的话那就在数据中的查询
+            article = articleDao.findById(id).get();
+            //在数据查询后放入redis中
+            redisTemplate.opsForValue().set("article_" + id, article, 10, TimeUnit.SECONDS);
+        }
+        return article;
     }
 
     /**
@@ -108,6 +121,7 @@ public class ArticleService {
      * @param id
      */
     public void deleteById(String id) {
+        redisTemplate.delete("article_" + id);
         articleDao.deleteById(id);
     }
 

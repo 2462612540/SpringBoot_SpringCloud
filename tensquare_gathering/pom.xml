@@ -9,13 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>tensquare_article</artifactId>
+    <artifactId>tensquare_gathering</artifactId>
     <dependencies>
-        <!--redis的架包-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
         <!--common-->
         <dependency>
             <groupId>com.shanghaiuniversity</groupId>
