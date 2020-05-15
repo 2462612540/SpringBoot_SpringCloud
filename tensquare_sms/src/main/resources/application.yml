@@ -1,0 +1,13 @@
+server:
+  port: 9010
+spring:
+  application:
+    name: tensquare_sms
+  rabbitmq:
+    host: 192.168.25.132
+aliyun:
+  sms:
+    accessKeyId: LTAI4FhiE4tZTwabn7Lge9NA
+    accessKeySecret: uwICyl91uRCKPRIciusLPnHqyrqPFJ
+    template_code: SMS_179225796
+    sign_name: 庄小焱
