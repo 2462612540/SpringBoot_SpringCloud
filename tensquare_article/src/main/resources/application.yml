@@ -1,11 +1,11 @@
 server:
-  port: 9003
+  port: 9004
 spring:
   application:
-    name: tensquare_qa
+    name: tensquare_article
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.25.132:3306/tensquare_qa?&characterEncoding=utf8&useSSL=true&allowMultiQueries=true
+    url: jdbc:mysql://192.168.25.132:3306/tensquare_article?&characterEncoding=utf8&useSSL=true&allowMultiQueries=true
     username: root
     password: root
   jpa:
