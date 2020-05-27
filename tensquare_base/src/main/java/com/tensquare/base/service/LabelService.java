@@ -78,7 +78,6 @@ public class LabelService {
             }
         });
     }
-
     public Page<Label> pageQuery(Label label, int page, int size) {
         //封装分页对象
         Pageable pageable = PageRequest.of(page - 1, size);
@@ -98,7 +97,6 @@ public class LabelService {
                     Predicate predicate = cb.like(root.get("labelname").as(String.class), "%" + label.getLabelname() + "%");
                     list.add(predicate);
                 }
-
                 if (!StringUtils.isEmpty(label.getState())) {
                     //state = "1"
                     Predicate predicate = cb.equal(root.get("state").as(String.class), label.getState());
@@ -111,5 +109,4 @@ public class LabelService {
             }
         }, pageable);
     }
-
 }

@@ -21,8 +21,7 @@ public class ReplyController {
 
 	@Autowired
 	private ReplyService replyService;
-	
-	
+
 	/**
 	 * 查询全部数据
 	 * @return

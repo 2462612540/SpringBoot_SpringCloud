@@ -31,14 +31,14 @@ public class ProblemController {
         return new Result(true, StatusCode.OK, "查询成功", pageResult);
     }
 
-    @GetMapping("/hotList/{labelid}/{page}/{size}")
+    @GetMapping("/hotlist/{labelid}/{page}/{size}")
     public Result hotList(@PathVariable String labelid, @PathVariable int page, @PathVariable int size) {
         Page<Problem> pageData = problemService.hotList(labelid, page, size);
         PageResult<Problem> pageResult = new PageResult<>(pageData.getTotalElements(), pageData.getContent());
         return new Result(true, StatusCode.OK, "查询成功", pageResult);
     }
 
-    @GetMapping("/waitList/{labelid}/{page}/{size}")
+    @GetMapping("/waitlist/{labelid}/{page}/{size}")
     public Result waitList(@PathVariable String labelid, @PathVariable int page, @PathVariable int size) {
         Page<Problem> pageData = problemService.waitList(labelid, page, size);
         PageResult<Problem> pageResult = new PageResult<>(pageData.getTotalElements(), pageData.getContent());

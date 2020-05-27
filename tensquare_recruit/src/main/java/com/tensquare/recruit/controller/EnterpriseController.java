@@ -26,12 +26,14 @@ public class EnterpriseController {
 
     /**
      * 查询热点
+     * hostkey表示的热门企业的相关的
      *
      * @return
      */
     @RequestMapping(value = "/search/hotlist", method = RequestMethod.GET)
     public Result findByIshot() {
-        return new Result(true, StatusCode.OK, "查询成功", enterpriseService.findByIshot("1"));
+        String hostkey = "1";
+        return new Result(true, StatusCode.OK, "查询成功", enterpriseService.findByIshot(hostkey));
     }
 
     /**

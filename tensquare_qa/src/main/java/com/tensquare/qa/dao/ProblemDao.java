@@ -13,7 +13,12 @@ import org.springframework.data.jpa.repository.Query;
  * @author Administrator
  */
 public interface ProblemDao extends JpaRepository<Problem, String>, JpaSpecificationExecutor<Problem> {
-
+    /**
+     * query（）表示的是使用的sql的语句俩查询的实现的 使用两个的联合查询的， 注意sql的优化写法
+     * @param labelid
+     * @param pageable
+     * @return
+     */
     @Query(value = "SELECT * FROM tb_problem, tb_pl WHERE id = problemid AND labelid = ? ORDER BY replytime DESC", nativeQuery = true)
     public Page<Problem> newList(String labelid, Pageable pageable);
 

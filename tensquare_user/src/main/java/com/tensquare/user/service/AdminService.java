@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import util.IdWorker;
 
@@ -30,6 +31,20 @@ public class AdminService {
 
     @Autowired
     private IdWorker idWorker;
+
+    @Autowired
+    private BCryptPasswordEncoder encoder;
+
+    public Admin login(Admin admin) {
+        //先根据用户名了查询对象
+        Admin admin1 = adminDao.findByLoginname(admin.getLoginname());
+        //再利用的匹配来实现的
+        if (admin1 != null && encoder.matches(admin.getPassword(), admin1.getPassword())) {
+            //保证数据库中的密码和用户的输入是一致的才能表示成功
+            return admin1;
+        }
+        return null;
+    }
 
     /**
      * 查询全部列表
@@ -82,6 +97,8 @@ public class AdminService {
      */
     public void add(Admin admin) {
         admin.setId(idWorker.nextId() + "");
+        //密码的加密手段
+        admin.setPassword(encoder.encode(admin.getPassword()));
         adminDao.save(admin);
     }
 

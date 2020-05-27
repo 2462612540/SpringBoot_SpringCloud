@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
+ * ControllerAdvice异常处理的类
  * 统一异常处理类
  */
 @ControllerAdvice

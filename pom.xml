@@ -18,6 +18,10 @@
         <module>tensquare_search</module>
         <module>tensquare_user</module>
         <module>tensquare_sms</module>
+        <module>tensquare_eureka</module>
+        <module>tensquare_friend</module>
+        <module>tensquare_manager</module>
+        <module>tensquare_web</module>
     </modules>
     <packaging>pom</packaging>
     <!--Springboot-->
@@ -27,6 +31,17 @@
         <version>2.1.3.RELEASE</version>
         <relativePath/>
     </parent>
+
+    <!--锁定版本的-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Finchley.M9</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <!--springboot的架包-->
@@ -48,4 +63,5 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
 </project>

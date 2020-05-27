@@ -29,7 +29,7 @@ public class RecruitController {
         return new Result(true, StatusCode.OK, "查询成功", recruitService.recommend());
     }
 
-    @GetMapping("/search/newList")
+    @GetMapping("/search/newlist")
     public Result newList() {
         return new Result(true, StatusCode.OK, "查询成功", recruitService.newList());
     }

@@ -17,10 +17,10 @@ import java.util.Date;
 @EnableConfigurationProperties({JwtUtil.class})
 @ConfigurationProperties(prefix = "jwt.config")
 public class JwtUtil {
+    //加载的盐
+    private String key;
 
-    private String key ;
-
-    private long ttl ;//一个小时
+    private long ttl;//一个小时
 
     public String getKey() {
         return key;
@@ -53,18 +53,19 @@ public class JwtUtil {
                 .setIssuedAt(now)
                 .signWith(SignatureAlgorithm.HS256, key).claim("roles", roles);
         if (ttl > 0) {
-            builder.setExpiration( new Date( nowMillis + ttl));
+            builder.setExpiration(new Date(nowMillis + ttl));
         }
         return builder.compact();
     }
 
     /**
      * 解析JWT
+     *
      * @param jwtStr
      * @return
      */
-    public Claims parseJWT(String jwtStr){
-        return  Jwts.parser()
+    public Claims parseJWT(String jwtStr) {
+        return Jwts.parser()
                 .setSigningKey(key)
                 .parseClaimsJws(jwtStr)
                 .getBody();

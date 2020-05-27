@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * CrossOrigin用于实现的跨域的访问的一个权限
+ */
 @RestController
 @CrossOrigin
 @RequestMapping("/label")
@@ -103,8 +106,6 @@ public class LabelController {
                             @RequestBody Label label) {
         Page<Label> pageData = labelService.pageQuery(label, page, size);
         PageResult<Label> labelPageResult = new PageResult<>(pageData.getTotalElements(), pageData.getContent());
-
         return new Result(true, StatusCode.OK, "查看分页成功", labelPageResult);
     }
-
 }

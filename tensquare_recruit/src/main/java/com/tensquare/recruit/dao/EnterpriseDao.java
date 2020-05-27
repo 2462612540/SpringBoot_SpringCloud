@@ -13,5 +13,5 @@ import java.util.List;
  * @author Administrator
  */
 public interface EnterpriseDao extends JpaRepository<Enterprise, String>, JpaSpecificationExecutor<Enterprise> {
-    public List<Enterprise> findByIshot(String ishot);
+    public List<Enterprise> findByIshot(String ishot);//相当于是的select enterprise from tablename  where ishost=？
 }
