@@ -75,7 +75,6 @@ public class SpitService {
         return spitDao.findByParentid(parentid, pageRequest);
     }
 
-
     public void thumbup(String spitId) {
         //方式一：效率有问题
         //Spit com.tensquare.spit.spit = spitDao.findById(spitId).get();

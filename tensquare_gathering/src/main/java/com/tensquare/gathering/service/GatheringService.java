@@ -15,6 +15,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,7 @@ import java.util.Map;
  * @author Administrator
  */
 @Service
+@Transactional
 public class GatheringService {
 
     @Autowired
@@ -69,6 +71,7 @@ public class GatheringService {
 
     /**
      * 根据ID查询实体
+     * 使用了的spring cache缓存的功能 相当于是的redis中的缓冲能力 但是这个不能设置过期的时间
      *
      * @param id
      * @return

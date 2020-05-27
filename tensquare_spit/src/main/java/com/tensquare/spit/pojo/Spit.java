@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 吐槽
+ * 吐槽实体类
  */
 public class Spit implements Serializable {
     @Id

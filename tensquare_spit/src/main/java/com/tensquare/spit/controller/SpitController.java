@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/com/tensquare/spit")
+@RequestMapping("/spit")
 public class SpitController {
 
     @Autowired

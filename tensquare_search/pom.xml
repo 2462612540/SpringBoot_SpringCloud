@@ -21,5 +21,4 @@
             <artifactId>spring-data-elasticsearch</artifactId>
         </dependency>
     </dependencies>
-
 </project>

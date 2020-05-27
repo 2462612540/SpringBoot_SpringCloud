@@ -2,10 +2,10 @@ server:
   port: 9006
 spring:
   application:
-    name: tensquare-com.tensquare.spit.spit
+    name: tensquare_spit
   data:
     mongodb:
       host: 192.168.25.132
-      database:
+      database: spitdb
   redis:
     host: 192.168.25.132
