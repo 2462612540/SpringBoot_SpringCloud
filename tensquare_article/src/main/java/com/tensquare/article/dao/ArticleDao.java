@@ -12,6 +12,8 @@ import org.springframework.data.jpa.repository.Query;
  * @author Administrator
  */
 public interface ArticleDao extends JpaRepository<Article, String>, JpaSpecificationExecutor<Article> {
+
+    //Modifying表示的是在增删改的时候为了保证线程安全的时候来使用的关键字
     @Modifying(clearAutomatically = true)
     @Query(value = "UPDATE tb_article SET state=1 WHERE id=?1", nativeQuery = true)
     public void updateState(String id);

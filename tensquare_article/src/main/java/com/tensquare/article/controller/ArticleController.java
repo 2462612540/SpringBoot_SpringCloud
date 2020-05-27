@@ -25,24 +25,24 @@ public class ArticleController {
     private ArticleService articleService;
 
     /**
-     * 文章审核
+     * 文章审核状态
      *
      * @param articleId
      * @return
      */
-    @PutMapping(value = "/examine/{articleId}")
+    @RequestMapping(value = "/examine/{articleId}", method = RequestMethod.PUT)
     public Result examine(@PathVariable String articleId) {
         articleService.updateState(articleId);
         return new Result(true, StatusCode.OK, "审核成功");
     }
 
     /**
-     * 点赞
+     * 点赞数量
      *
      * @param articleId
      * @return
      */
-    @PutMapping(value = "/thumbup/{articleId}")
+    @RequestMapping(value = "/thumbup/{articleId}", method = RequestMethod.PUT)
     public Result thumbup(@PathVariable String articleId) {
         articleService.updateThumbup(articleId);
         return new Result(true, StatusCode.OK, "审核成功");

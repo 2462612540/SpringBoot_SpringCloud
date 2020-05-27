@@ -14,6 +14,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,10 +22,12 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 服务层
+ * 如果是涉及到到数据的增删和该的操作，在spring中的都是需要时的添加事务的
  *
  * @author Administrator
  */
 @Service
+@Transactional
 public class ArticleService {
 
     @Autowired
@@ -36,6 +39,11 @@ public class ArticleService {
     @Autowired
     private RedisTemplate redisTemplate;
 
+    /**
+     * 更新状态
+     *
+     * @param id
+     */
     public void updateState(String id) {
         articleDao.updateState(id);
     }
@@ -50,6 +58,7 @@ public class ArticleService {
      * @return
      */
     public List<Article> findAll() {
+        //应该也是先做查询的缓冲的中的数据，在去查询到到数据的库，
         return articleDao.findAll();
     }
 
@@ -80,30 +89,36 @@ public class ArticleService {
 
     /**
      * 根据ID查询实体
+     * 注意这里的redis的是没有起作用的的。请关注一下这个redis的问题
      *
      * @param id
      * @return
      */
+    //为甚有的时候redis的不起作用的是因为是的redis中的设置了过期的时间的设置
     public Article findById(String id) {
         //先从缓存中查询数据
         Article article = (Article) redisTemplate.opsForValue().get("article_" + id);
         if (article == null) {
-            //缓存中的数据为空的话那就在数据中的查询
+            //缓存中的数据为空的话那就在数据mysql中的查询
             article = articleDao.findById(id).get();
-            //在数据查询后放入redis中
-            redisTemplate.opsForValue().set("article_" + id, article, 10, TimeUnit.SECONDS);
+            //在数据查询后放入redis缓存中  并设置过期的时间的timeUnit这样能的一个效果
+            redisTemplate.opsForValue().set("article_" + article.getId(), article, 10, TimeUnit.HOURS);
+            return article;
         }
         return article;
     }
 
     /**
-     * 增加
+     * 增加 然后在添加到缓存中
      *
      * @param article
      */
     public void add(Article article) {
+        //先插入到数据库中
         article.setId(idWorker.nextId() + "");
         articleDao.save(article);
+        //然后在出插入redis中的 并设置过期的时间是的1小时
+        redisTemplate.opsForValue().set("article_" + article.getId(), article, 10, TimeUnit.HOURS);
     }
 
     /**
@@ -112,7 +127,12 @@ public class ArticleService {
      * @param article
      */
     public void update(Article article) {
+        //删除原来的缓存信息
+        redisTemplate.delete("article_" + article.getId());
+        //在更新新的数据的到数据库中
         articleDao.save(article);
+        //在将新的数据放入缓存的数据库中
+        redisTemplate.opsForValue().set("article_" + article.getId(), article, 10, TimeUnit.HOURS);
     }
 
     /**
@@ -121,7 +141,9 @@ public class ArticleService {
      * @param id
      */
     public void deleteById(String id) {
+        //先删除缓存中的数据
         redisTemplate.delete("article_" + id);
+        //然后在删除数据库中的数据
         articleDao.deleteById(id);
     }
 
@@ -132,9 +154,7 @@ public class ArticleService {
      * @return
      */
     private Specification<Article> createSpecification(Map searchMap) {
-
         return new Specification<Article>() {
-
             @Override
             public Predicate toPredicate(Root<Article> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 List<Predicate> predicateList = new ArrayList<Predicate>();
@@ -186,12 +206,8 @@ public class ArticleService {
                 if (searchMap.get("type") != null && !"".equals(searchMap.get("type"))) {
                     predicateList.add(cb.like(root.get("type").as(String.class), "%" + (String) searchMap.get("type") + "%"));
                 }
-
                 return cb.and(predicateList.toArray(new Predicate[predicateList.size()]));
-
             }
         };
-
     }
-
 }
