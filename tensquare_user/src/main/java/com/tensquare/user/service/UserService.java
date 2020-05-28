@@ -21,10 +21,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -137,6 +134,13 @@ public class UserService {
         //用户的加密
         user.setPassword(encoder.encode(user.getPassword()));
         user.setId(idWorker.nextId() + "");
+        user.setFollowcount(0);//关注数
+        user.setFanscount(0);//粉丝数
+        user.setOnline(0L);//在线时长
+        user.setRegdate(new Date());//注册日期
+        user.setUpdatedate(new Date());//更新日期
+        user.setLastdate(new Date());//最后登陆日期
+        //存入数据中
         userDao.save(user);
     }
 

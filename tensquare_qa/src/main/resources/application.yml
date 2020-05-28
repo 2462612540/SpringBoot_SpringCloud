@@ -12,5 +12,8 @@ spring:
     database: mysql
     show-sql: true
     generate-ddl: false
+jwt:
+  config:
+    key: itcast
 
 

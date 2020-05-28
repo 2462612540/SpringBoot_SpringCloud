@@ -12,6 +12,8 @@ import java.util.Date;
 
 /**
  * Created by Administrator on 2018/4/11.
+ *
+ * buid用于的是生成token    parser用于的解析token的
  */
 @Component
 @EnableConfigurationProperties({JwtUtil.class})

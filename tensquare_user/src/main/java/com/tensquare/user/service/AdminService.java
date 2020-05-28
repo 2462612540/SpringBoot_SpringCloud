@@ -40,7 +40,7 @@ public class AdminService {
     public Admin login(Admin admin) {
         //先根据用户名了查询对象
         Admin admin1 = adminDao.findByLoginname(admin.getLoginname());
-        //再利用的匹配来实现的
+        //然后在的拿到用户的密码和输入的密码进行匹配判断是否相同
         if (admin1 != null && encoder.matches(admin.getPassword(), admin1.getPassword())) {
             //保证数据库中的密码和用户的输入是一致的才能表示成功
             return admin1;
@@ -93,11 +93,12 @@ public class AdminService {
     }
 
     /**
-     * 增加
+     * 增加管理员
      *
      * @param admin
      */
     public void add(Admin admin) {
+        //给用户设置的不同的分布式的ID 利用ID生成器来生成用户的ID
         admin.setId(idWorker.nextId() + "");
         //密码的加密手段
         admin.setPassword(encoder.encode(admin.getPassword()));
@@ -129,9 +130,7 @@ public class AdminService {
      * @return
      */
     private Specification<Admin> createSpecification(Map searchMap) {
-
         return new Specification<Admin>() {
-
             @Override
             public Predicate toPredicate(Root<Admin> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 List<Predicate> predicateList = new ArrayList<Predicate>();
@@ -151,12 +150,8 @@ public class AdminService {
                 if (searchMap.get("state") != null && !"".equals(searchMap.get("state"))) {
                     predicateList.add(cb.like(root.get("state").as(String.class), "%" + (String) searchMap.get("state") + "%"));
                 }
-
                 return cb.and(predicateList.toArray(new Predicate[predicateList.size()]));
-
             }
         };
-
     }
-
 }

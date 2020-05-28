@@ -14,6 +14,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,9 @@ public class ProblemService {
 
     @Autowired
     private IdWorker idWorker;
+
+    @Autowired
+    private HttpServletRequest request;
 
     public Page<Problem> newList(String labelid, int page, int rows) {
         Pageable pageable = PageRequest.of(page, rows);
@@ -99,6 +103,10 @@ public class ProblemService {
      * @param problem
      */
     public void add(Problem problem) {
+        String token = (String) request.getAttribute("claims_user");
+        if (token == null || !"".equals(token)) {
+            throw new RuntimeException("权限不足");
+        }
         problem.setId(idWorker.nextId() + "");
         problemDao.save(problem);
     }
