@@ -72,6 +72,7 @@ public class UserController {
      */
     @RequestMapping(value = "/register/{code}", method = RequestMethod.POST)
     public Result register(@PathVariable String code, @RequestBody User user) {
+        //从redis中的提取出来
         String syscode = (String) redisTemplate.opsForValue().get("checkcode_" + user.getMobile());
         //提取系统正确的验证码
         if (syscode == null) {
@@ -86,6 +87,7 @@ public class UserController {
         user.setRegdate(new Date());//注册日期
         user.setUpdatedate(new Date());//更新日期
         user.setLastdate(new Date());//最后登陆日期
+
         userService.add(user);
         return new Result(true, StatusCode.OK, "注册成功");
     }

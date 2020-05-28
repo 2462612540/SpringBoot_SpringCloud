@@ -20,6 +20,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +33,7 @@ import java.util.concurrent.TimeUnit;
  * @author Administrator
  */
 @Service
+@Transactional
 public class UserService {
 
     @Autowired
@@ -73,14 +75,13 @@ public class UserService {
         //生成六位随机数字
         String checkcode = RandomStringUtils.randomNumeric(6);
         //向缓存中放一份
-        redisTemplate.opsForValue().set("checkcode_" + mobile, checkcode, 6, TimeUnit.HOURS);
+        redisTemplate.opsForValue().set("checkcode_" + mobile, checkcode, 10, TimeUnit.MINUTES);
         //给用户发一份
         Map<String, String> map = new HashMap<>();
         map.put("mobile", mobile);
         map.put("checkcode", checkcode);
+        //给Mq中的发送了消息
         rabbitTemplate.convertAndSend("sms", map);
-        //在控制台显示一份【方便测试】
-        System.out.println("验证码为: " + checkcode);
     }
 
     /**

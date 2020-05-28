@@ -12,3 +12,7 @@ spring:
     database: mysql
     show-sql: true
     generate-ddl: false
+  redis:
+    host: 192.168.25.132
+  rabbitmq:
+    host: 192.168.25.132

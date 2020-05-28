@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
+/**
+ * 消费这个队列来实现的
+ */
 @Component
 @RabbitListener(queues = "sms")
 public class SmsListener {
