@@ -2,7 +2,7 @@ server:
   port: 9003
 spring:
   application:
-    name: tensquare_qa
+    name: tensquare-qa
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://192.168.25.132:3306/tensquare_qa?&characterEncoding=utf8&useSSL=true&allowMultiQueries=true
@@ -15,5 +15,11 @@ spring:
 jwt:
   config:
     key: itcast
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:6868/eureka/
+  instance:
+    prefer-ip-address: true #用于来表示的是跨域的访问
 
 

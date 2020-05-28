@@ -2,7 +2,7 @@ server:
   port: 9010
 spring:
   application:
-    name: tensquare_sms
+    name: tensquare-sms
   rabbitmq:
     host: 192.168.25.132
 aliyun:

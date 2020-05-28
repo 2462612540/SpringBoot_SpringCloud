@@ -2,7 +2,7 @@ server:
   port: 6868 #服务端口
 spring:
   application:
-    name: tensquare_eureka
+    name: tensquare-eureka
 eureka:
   client:
     register-with-Eureka: true #是否将自己注册到Eureka服务中，本身就是所有无需注册
