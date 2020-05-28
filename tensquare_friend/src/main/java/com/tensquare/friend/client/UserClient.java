@@ -1,4 +1,4 @@
-package com.tensquare.friend.friend.client;
+package com.tensquare.friend.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;

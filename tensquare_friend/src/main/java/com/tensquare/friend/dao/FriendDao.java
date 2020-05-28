@@ -1,6 +1,6 @@
-package com.tensquare.friend.friend.dao;
+package com.tensquare.friend.dao;
 
-import com.tensquare.friend.friend.pojo.Friend;
+import com.tensquare.friend.pojo.Friend;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

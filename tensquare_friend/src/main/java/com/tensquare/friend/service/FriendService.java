@@ -1,4 +1,4 @@
-package com.tensquare.friend.friend.service;
+package com.tensquare.friend.service;
 
 import com.tensquare.friend.dao.FriendDao;
 import com.tensquare.friend.dao.NoFriendDao;

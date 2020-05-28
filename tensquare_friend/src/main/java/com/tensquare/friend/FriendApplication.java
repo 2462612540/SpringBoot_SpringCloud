@@ -1,4 +1,4 @@
-package com.tensquare.friend.friend;
+package com.tensquare.friend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

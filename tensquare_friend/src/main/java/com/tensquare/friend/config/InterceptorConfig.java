@@ -1,6 +1,6 @@
-package com.tensquare.friend.friend.config;
+package com.tensquare.friend.config;
 
-import com.tensquare.friend.friend.interceptor.JwtInterceptor;
+import com.tensquare.friend.interceptor.JwtInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

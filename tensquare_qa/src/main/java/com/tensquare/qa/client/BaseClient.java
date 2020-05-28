@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(value = "tensquare-base")
+@FeignClient(value = "tensquare-base", fallback = BaseClientImp.class)
 public interface BaseClient {
 
     /**

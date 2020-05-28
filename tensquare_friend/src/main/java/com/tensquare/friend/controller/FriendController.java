@@ -1,9 +1,9 @@
-package com.tensquare.friend.friend.controller;
+package com.tensquare.friend.controller;
 
+import com.tensquare.friend.client.UserClient;
 import entity.Result;
 import entity.StatusCode;
-import com.tensquare.friend.friend.client.UserClient;
-import com.tensquare.friend.friend.service.FriendService;
+import com.tensquare.friend.service.FriendService;
 import io.jsonwebtoken.Claims;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/com/tensquare/friend/friend")
+@RequestMapping("/com/tensquare/friend")
 public class FriendController {
 
     @Autowired

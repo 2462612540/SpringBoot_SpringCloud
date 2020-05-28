@@ -1,4 +1,4 @@
-package com.tensquare.friend.friend.pojo;
+package com.tensquare.friend.pojo;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

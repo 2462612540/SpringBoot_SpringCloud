@@ -1,4 +1,4 @@
-package com.tensquare.friend.friend.interceptor;
+package com.tensquare.friend.interceptor;
 
 import io.jsonwebtoken.Claims;
 import org.apache.commons.lang.StringUtils;
@@ -21,7 +21,6 @@ public class JwtInterceptor implements HandlerInterceptor {
         //无论如何都放行，具体能不能操作还是在具体的操作中判断
         //拦截器只是负责把有请求头中包含token的令牌进行一个解析验证
         String header = request.getHeader("Authorization");
-
         if (StringUtils.isNotBlank(header)){
             //如果有包含Authorization头信息，就对其进行解析
             if (header.startsWith("Bearer ")){
