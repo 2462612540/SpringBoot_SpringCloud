@@ -14,4 +14,9 @@ spring:
     generate-ddl: false
   redis:
     host: 192.168.25.132
-
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:6868/eureka/
+  instance:
+    prefer-ip-address: true #用于来表示的是跨域的访问

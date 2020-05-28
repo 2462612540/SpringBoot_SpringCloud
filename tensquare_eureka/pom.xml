@@ -27,5 +27,4 @@
             <artifactId>spring-boot</artifactId>
         </dependency>
     </dependencies>
-
 </project>
