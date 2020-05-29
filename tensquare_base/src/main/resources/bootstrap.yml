@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    config:
+      name: tensquare_base  #请注意这个配置的填写 根据上的配置
+      profile: dev
+      label: master
+      uri: http://127.0.0.1:9013

@@ -1,0 +1,18 @@
+server:
+  port: 9013
+spring:
+  application:
+    name: tensquare_config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/2462612540/SpringBoot_SpringCloud.git
+  rabbitmq:
+    host: 192.168.25.132
+management:
+  endpoint:
+    web:
+      exposure:
+        include: bus-refresh
+
