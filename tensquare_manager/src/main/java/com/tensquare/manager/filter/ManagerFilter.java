@@ -60,7 +60,6 @@ public class ManagerFilter extends ZuulFilter {
         RequestContext requestContext = RequestContext.getCurrentContext();
         //得到request域
         HttpServletRequest request = requestContext.getRequest();
-
         //zuul第一次请求放行
         if (request.getMethod().equals("OPTIONS")) {
             return null;
